@@ -89,4 +89,89 @@ describe('DNA#use', function () {
         expect(dna.render('{{value|reverse}}', {value: 27})).to.be.equal('72');
         expect(spy).to.have.been.called.once;
     });
+
+    it('should use a filter as starting point', function () {
+        function author(firstname, lastname) {
+            return lastname[0].toUpperCase().concat(lastname.slice(1)).concat(', ')
+            .concat(firstname[0].toUpperCase()).concat(firstname.slice(1));
+        }
+
+        var spy = chai.spy(author);
+        dna.use('author', spy);
+        expect(dna.render('{{author:christian:rädel}}')).to.be.equal('Rädel, Christian');
+        expect(spy).to.have.been.called.once;
+    });
+});
+
+describe('DNA#plugins#colorize', function () {
+    var dna = null;
+
+    beforeEach(function () {
+        dna = engine.createDNA().use(engine.colorize);
+    });
+
+    it('should print a string in a given color', function () {
+        var template = '\t{{value|colorize:rainbow:underline}}';
+        console.log(dna.render(template, {value: 'What is the meaning of Life?'}));
+    });
+});
+
+describe('DNA#plugins#datetime', function () {
+    var dna = null;
+
+    beforeEach(function () {
+        dna = engine.createDNA().use(engine.datetime);
+    });
+
+    it('should render current datetime without given format', function () {
+        var template = '\t{{datetime}}';
+        console.log(dna.render(template));
+    });
+
+    it('should render current datetime with given format', function () {
+        var template = '\t{{datetime:YYYY-MM-DD HH\\:mm\\:ss}}';
+        console.log(dna.render(template));
+    });
+
+    it('should render datetime without given format', function () {
+        var template = '\t{{value|datetime}}';
+        console.log(dna.render(template, {value: new Date('1988-06-24 05:23:43')}));
+    });
+
+    it('should render datetime with given format', function () {
+        var template = '\t{{value|datetime:YYYY-MM-DD HH\\:mm\\:ss}}';
+        console.log(dna.render(template, {value: 0}));
+    });
+});
+
+describe('DNA#plugins#strings', function () {
+    var dna = null;
+
+    beforeEach(function () {
+        dna = engine.createDNA().use(engine.strings);
+    });
+
+    it('should render a string in uppercase', function () {
+        expect(dna.render('{{value|uppercase}}', {value: 'dna'})).to.be.equal('DNA');
+    });
+
+    it('should render a string in lowercase', function () {
+        expect(dna.render('{{value|lowercase}}', {value: 'DNA'})).to.be.equal('dna');
+    });
+
+    it('should render a string in camelcase', function () {
+        expect(dna.render('{{value|camelcase}}', {value: 'hello-world!'})).to.be.equal('HelloWorld!');
+    });
+
+    it('should render a string capitalized', function () {
+        expect(dna.render('{{value|capitalize}}', {value: 'dna'})).to.be.equal('Dna');
+    });
+
+    it('should render a string rightaligned', function () {
+        expect(dna.render('{{value|rightalign:5}}', {value: 'dna'})).to.be.equal('  dna');
+    });
+
+    it('should render a string in fixedlength', function () {
+        expect(dna.render('{{value|fixedlength:5}}', {value: 'dna'})).to.be.equal('dna  ');
+    });
 });

@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/christian-raedel/dna",
   "dependencies": {
+    "colors": "^0.6.2",
     "debug": "^2.0.0",
     "lodash": "^2.4.1",
+    "moment": "^2.8.3",
     "node-cconf": "git+https://github.com/christian-raedel/node-cconf",
     "q": "^1.0.1"
   },

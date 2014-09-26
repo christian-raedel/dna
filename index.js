@@ -11,3 +11,9 @@ module.exports.createDNA = function (opts) {
 
     return dna;
 };
+
+module.exports.colorize = require('./lib/plugins/colorize');
+
+module.exports.datetime = require('./lib/plugins/datetime');
+
+module.exports.strings  = require('./lib/plugins/strings');

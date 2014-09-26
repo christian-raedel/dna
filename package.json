@@ -1,0 +1,36 @@
+{
+  "name": "dna",
+  "version": "0.2.7",
+  "description": "A template engine.",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christian-raedel/dna.git"
+  },
+  "keywords": [
+    "template",
+    "engine"
+  ],
+  "author": "Christian Rädel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/christian-raedel/dna/issues"
+  },
+  "homepage": "https://github.com/christian-raedel/dna",
+  "dependencies": {
+    "debug": "^2.0.0",
+    "lodash": "^2.4.1",
+    "node-cconf": "git+https://github.com/christian-raedel/node-cconf",
+    "q": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "chai-spies": "^0.5.1",
+    "jsdoc": "^3.3.0-alpha9",
+    "mocha": "^1.21.4"
+  }
+}

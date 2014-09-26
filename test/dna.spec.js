@@ -41,6 +41,32 @@ describe('DNA#render', function () {
         })
         .done();
     });
+
+    it('should iterate an array', function () {
+        var template = '{{repeat item in array}}Hello {{item}}!{{#repeat}}';
+        expect(dna.render(template, {array: ['world', 'dna']})).to.be.equal('Hello world!Hello dna!');
+    });
+
+    it('should iterate an array of objects', function () {
+        var template = '{{repeat item in array}}Hello {{item.name}}!{{#repeat}}';
+        expect(dna.render(template, {
+            array: [
+                {name: 'world'},
+                {name: 'dna'}
+            ]
+        })).to.be.equal('Hello world!Hello dna!');
+    });
+
+    it('should iterate an object', function () {
+        var template = '{{repeat item in object}}Hello {{item}}!{{#repeat}}';
+        expect(dna.render(template, {object: {to: 'world', name: 'dna'}})).to.be.equal('Hello world!Hello dna!');
+    });
+
+    it('should render a conditional', function () {
+        var template = '{{if value === 27}}Hello dna!{{#if}}';
+        expect(dna.render(template, {value: 27})).to.be.equal('Hello dna!');
+        expect(dna.render(template, {value: 43})).to.be.equal('');
+    });
 });
 
 describe('DNA#use', function () {

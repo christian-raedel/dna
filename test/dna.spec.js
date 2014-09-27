@@ -114,6 +114,11 @@ describe('DNA#plugins#colorize', function () {
         var template = '\t{{value|colorize:rainbow:underline}}';
         console.log(dna.render(template, {value: 'What is the meaning of Life?'}));
     });
+
+    it('should print a string using themed color', function () {
+        var template = '\t{{value|colorize}}';
+        console.log(dna.render(template, {value: 'info', theme: {'info': 'rainbow'}}));
+    });
 });
 
 describe('DNA#plugins#datetime', function () {

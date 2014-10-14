@@ -103,6 +103,26 @@ describe('DNA#use', function () {
     });
 });
 
+describe('DNA#events', function () {
+    var dna = null;
+
+    beforeEach(function () {
+        dna = new engine();
+    });
+
+    it('should use callbacks', function () {
+        function callback(value) {
+            return (parseInt(value) + 1).toString();
+        }
+
+        var spy = chai.spy(callback);
+        dna.onexpression = spy;
+        dna.oncomplete = spy;
+        expect(dna.render('{{value}}', {value: 25})).to.be.equal('27');
+        expect(spy).to.have.been.called.twice;
+    });
+});
+
 describe('DNA#plugins#colorize', function () {
     var dna = null;
 

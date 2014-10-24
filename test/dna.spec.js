@@ -24,6 +24,10 @@ describe('DNA#render', function () {
         expect(dna.render('{{value}}', {value: 27})).to.be.equal('27');
     });
 
+    it('should render an empty string, if value is undefined', function () {
+        expect(dna.render('{{value}}', {})).to.be.equal('');
+    });
+
     it('should render a file', function (done) {
         var filename = __dirname + '/test.tmp.tpl';
         fs.writeFileSync(filename, '{{value}}', 'utf-8');
